@@ -1,7 +1,6 @@
 <div class="space-y-12">
   <h1 class="font-bold text-4xl"><%= Current.user.email_address %>'s dashboard</h1>
   <%= link_to "New Guest", new_guest_path%>
- <%= button_to "Log Out", session_path, method: :delete if authenticated?%>
  <%= debug @guests %>
 
 </div>

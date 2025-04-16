@@ -22,9 +22,27 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="max-w-screen">
+    <nav class="fixed inset-x-0 top-0 z-10 border-b border-black/5 bg-white">
+      <div class="flex h-14 items-center justify-between gap-8 px-24">
+        <%= link_to(root_path) do %>
+        <div class="flex justify-center gap-1">
+        <div>||</div>
+        <div class="font-semibold">PARALLEL</div>
+        </div>
+         <% end %>
+        <div>
+          <% if authenticated? %>
+          <%= button_to "Log Out", session_path, method: :delete, class: "hover:cursor-pointer"%>
+          <% else %>
+          <%= link_to "Login", login_path %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
+
   </body>
 </html>
