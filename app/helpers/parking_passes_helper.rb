@@ -1,0 +1,2 @@
+module ParkingPassesHelper
+end

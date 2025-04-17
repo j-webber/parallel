@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  expiration_date: 2025-04-29
+  qr_code: MyString
+  valid_days: 1
+  guest: one
+
+two:
+  expiration_date: 2025-04-29
+  qr_code: MyString
+  valid_days: 1
+  guest: two

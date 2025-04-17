@@ -1,0 +1,18 @@
+<div id="<%= dom_id parking_pass %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Expiration date:</strong>
+    <%= parking_pass.expiration_date %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Qr code:</strong>
+    <%= parking_pass.qr_code %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Valid days:</strong>
+    <%= parking_pass.valid_days %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Guest:</strong>
+    <%= parking_pass.guest_id %>
+  </div>
+</div>

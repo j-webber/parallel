@@ -1,6 +1,29 @@
-<div class="space-y-12">
-  <h1 class="font-bold text-4xl"><%= Current.user.email_address %>'s dashboard</h1>
-  <%= link_to "New Guest", new_guest_path%>
- <%= debug @guests %>
+<div class="space-y-12 max-w-5xl mx-auto w-full flex flex-col">
+  
+  <div class="flex flex-col items-center gap-8">
+<h1 class="font-bold text-4xl font-ibm"><%= Current.user.email_address %>'s dashboard</h1>
+
+  <%= link_to "Create New Guest", new_guest_path, class:"px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md font-medium"%>
+  </div>
+
+  <table class="table-auto">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Pass</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @guests.each do |guest| %>
+    <tr>
+      <td><%= guest.nickname || guest.first_name %></td>
+      <td><%= guest.parking_passes.last || "No Active Pass" %></td>
+      <td><%= link_to "Create New Pass", new_parking_pass_path, class:"px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md font-medium" %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+ 
 
 </div>

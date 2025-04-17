@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  resources :parking_passes
+
   get "login", to: "sessions#new"
   resource :session, except: :new
+
   resources :passwords, param: :token
 
   get "dashboard", to: "guests#index"

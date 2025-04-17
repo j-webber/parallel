@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_14_203209) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_17_020253) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,6 +50,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_203209) do
     t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
+  create_table "parking_passes", force: :cascade do |t|
+    t.datetime "expiration_date"
+    t.string "qr_code"
+    t.integer "valid_days"
+    t.integer "guest_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_parking_passes_on_guest_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -70,5 +80,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_14_203209) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "guests", "users"
+  add_foreign_key "parking_passes", "guests"
   add_foreign_key "sessions", "users"
 end
