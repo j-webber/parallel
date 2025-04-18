@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  resources :parking_passes
-
   get "login", to: "sessions#new"
   resource :session, except: :new
 
   resources :passwords, param: :token
 
   get "dashboard", to: "guests#index"
-  resources :guests
+  resources :guests do
+    resources :parking_passes
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 

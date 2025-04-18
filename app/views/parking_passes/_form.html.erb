@@ -1,4 +1,4 @@
-<%= form_with(model: parking_pass, class: "contents") do |form| %>
+<%= form_with(model: [@guest, parking_pass], class: "contents") do |form| %>
   <% if parking_pass.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
       <h2><%= pluralize(parking_pass.errors.count, "error") %> prohibited this parking_pass from being saved:</h2>
