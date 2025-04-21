@@ -24,39 +24,28 @@ class ParkingPassesController < ApplicationController
   def create
     @parking_pass = @guest.parking_passes.new(parking_pass_params)
 
-    respond_to do |format|
       if @parking_pass.save
-        @parking_pass.qr_code = generate_parking_pass(@parking_pass)
-        format.html { redirect_to @parking_pass, notice: "Parking pass was successfully created." }
-        format.json { render :show, status: :created, location: @parking_pass }
+        qrcode = generate_parking_pass(@parking_pass)
+        @parking_pass.update(qr_code: qrcode)
+        redirect_to dashboard_path, notice: "Parking pass was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @parking_pass.errors, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
-    end
   end
 
   # PATCH/PUT /parking_passes/1 or /parking_passes/1.json
   def update
-    respond_to do |format|
       if @parking_pass.update(parking_pass_params)
-        format.html { redirect_to @parking_pass, notice: "Parking pass was successfully updated." }
-        format.json { render :show, status: :ok, location: @parking_pass }
+        redirect_to dashboard_path, notice: "Parking pass was successfully updated."
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @parking_pass.errors, status: :unprocessable_entity }
+       render :edit, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /parking_passes/1 or /parking_passes/1.json
   def destroy
     @parking_pass.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to dashboard, status: :see_other, notice: "Parking pass was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  redirect_to dashboard_path, status: :see_other, notice: "Parking pass was successfully destroyed."
   end
 
   private
@@ -75,6 +64,7 @@ class ParkingPassesController < ApplicationController
     end
 
     def generate_parking_pass(parking_pass)
-      RQRCode::QRCode.new(guest_parking_pass_url(parking_pass)).svg
+      puts parking_pass
+      RQRCode::QRCode.new(guest_parking_pass_url(parking_pass.guest_id, parking_pass.id)).as_svg
     end
 end

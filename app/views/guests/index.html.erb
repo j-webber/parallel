@@ -18,7 +18,13 @@
     <% @guests.each do |guest| %>
     <tr>
       <td><%= guest.nickname || guest.first_name %></td>
-      <td><%= guest.parking_passes.last || "No Active Pass" %></td>
+      <td>
+        <% if guest.parking_passes.last.qr_code %>
+        <%= raw(guest.parking_passes.last.qr_code) %>
+        <% else %>
+        <%= "No Active Pass"%>
+        <% end %>
+      </td>
       <td><%= link_to "Create New Pass", new_guest_parking_pass_path(guest), class:"px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-md font-medium" %></td>
     </tr>
     <%end%>
