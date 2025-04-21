@@ -27,6 +27,7 @@ class ParkingPassesController < ApplicationController
       if @parking_pass.save
         qrcode = generate_parking_pass(@parking_pass)
         @parking_pass.update(qr_code: qrcode)
+        ParkingPassMailer.with(parking_pass: @parking_pass, guest: @guest).send_pass.deliver_later
         redirect_to dashboard_path, notice: "Parking pass was successfully created."
       else
         render :new, status: :unprocessable_entity

@@ -1,0 +1,7 @@
+<p>
+  Hi <%= @guest.first_name %>,
+</p>
+<p>Here is your parking pass.</p>
+<div>
+<%= raw(@parking_pass.qr_code) %>
+</div>
